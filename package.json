@@ -1,0 +1,30 @@
+{
+  "name": "logseq-plugin-tags",
+  "version": "0.0.0",
+  "main": "dist/index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@logseq/libs": "^0.0.1-alpha.33",
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-collapsible": "^0.1.5",
+    "@stitches/react": "^1.2.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2",
+    "vite-tsconfig-paths": "^3.3.17"
+  },
+  "logseq": {
+    "id": "logseq-tags",
+    "title": "Tags"
+  }
+}
