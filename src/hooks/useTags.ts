@@ -11,7 +11,7 @@ export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
 
   useLayoutEffect(() => {
     (async () => {
-      const rawRefs = await logseq.DB.datascriptQuery(`
+      const rawBlockRefs = await logseq.DB.datascriptQuery(`
         [:find ?content ?tag (pull ?b [*])
           :where
           [?b :block/refs ?page-ref]
@@ -29,7 +29,7 @@ export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
       `);
 
       if (isMounted()) {
-        setRawBlockRefs(rawRefs);
+        setRawBlockRefs(rawBlockRefs);
         setRawPageTags(rawPageTags);
       }
     })();
@@ -44,16 +44,27 @@ export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
     const tagsWithNullsFromRef: Array<TagAndUsage | null> = rawBlockRefs.map(
       ([blockContent, tagName, block]: [string, string, any]) => {
         const escapedTag = escapeRegExp(tagName);
+        const lowercaseBlockContent = blockContent.toLowerCase();
+
         // We collect pagetags in separate query, so we need to filter out the page tags
-        if (blockContent.includes('tags::') && block['pre-block?'] === true) {
+        if (
+          (lowercaseBlockContent.includes('tags::') || lowercaseBlockContent.includes('#+tags:')) &&
+          block['pre-block?'] === true
+        ) {
           return null;
         }
-        if (blockContent.match(new RegExp(`#${escapedTag}|#\[\[${escapedTag}\]\]`, 'g')) != null) {
+        if (
+          blockContent.match(new RegExp(`#${escapedTag}|#\\[\\[${escapedTag}\\]\\]`, 'gi')) != null
+        ) {
           return {
             tagName,
             blockOrPage: block,
           };
         }
+
+        // if (blockContent.includes('#')) {
+        //   console.log('No match:', escapedTag, blockContent);
+        // }
         return null;
       },
     );

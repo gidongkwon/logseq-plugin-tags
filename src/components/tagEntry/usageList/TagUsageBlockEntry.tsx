@@ -13,8 +13,9 @@ type Props = {
 export const TagUsageBlockEntry = ({ block }: Props) => {
   const { name } = useContext(TagContext);
 
+  const escapedTag = escapeRegExp(name);
   const contentSplittedByTagName = block.content.split(
-    new RegExp(`(\#${escapeRegExp(name)})`, 'gi'),
+    new RegExp(`(#${escapedTag}|#\\[\\[${escapedTag}\\]\\])`, 'gi'),
   );
 
   return (
@@ -22,13 +23,17 @@ export const TagUsageBlockEntry = ({ block }: Props) => {
       className={commonEntryStyle()}
       onClick={async e => {
         const containingPage = await logseq.Editor.getPage(block.page.id);
-        return logseq.Editor.scrollToBlockInPage(containingPage!.name, block);
+        return logseq.Editor.scrollToBlockInPage(containingPage!.name, block.uuid);
       }}
     >
       <TagContainerTypeBadge type='block' />
       <Paragraph size='2' css={{ margin: 0 }}>
         {contentSplittedByTagName.map((value, index) =>
-          value.toLowerCase() === `#${name}` ? <Mark key={index}>{value}</Mark> : value,
+          value.toLowerCase() === `#${name}` || value.toLowerCase() === `#[[${name}]]` ? (
+            <Mark key={index}>{value}</Mark>
+          ) : (
+            value
+          ),
         )}
       </Paragraph>
     </div>
