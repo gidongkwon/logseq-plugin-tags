@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@logseq/libs": "^0.0.1-alpha.33",
+    "@logseq/libs": "^0.0.1-alpha.34",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-collapsible": "^0.1.5",
     "@stitches/react": "^1.2.6",
