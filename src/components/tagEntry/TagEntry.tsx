@@ -14,11 +14,17 @@ const StyledTag = styled(Collapsible.Root, {
 const StyledTagHeader = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  padding: '$3',
+  paddingY: '$1',
+  paddingLeft: '$1',
+  paddingRight: '$3',
+  cursor: 'default',
 
   borderRadius: '$2',
   '&:hover': {
     backgroundColor: '$slate2',
+  },
+  [`& ${Text}`]: {
+    cursor: 'default',
   },
 });
 

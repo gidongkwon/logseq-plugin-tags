@@ -7,6 +7,7 @@ import { TagEntry } from './tagEntry/TagEntry';
 const StyldTagList = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  overflowY: 'auto',
 });
 
 type Props = {

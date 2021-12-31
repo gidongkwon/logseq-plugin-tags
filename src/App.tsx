@@ -5,10 +5,24 @@ import { useAppVisible } from './hooks/useAppVisible';
 import { css } from './stitches.config';
 
 const body = css({
+  position: 'relative',
   height: '100%',
+
+  '& ::-webkit-scrollbar': {
+    width: '6px',
+  },
+  '& ::-webkit-scrollbar-corner': {
+    background: '0 0',
+  },
+  '& ::-webkit-scrollbar-thumb': {
+    backgroundColor: '$interactiveBorder',
+  },
 });
 
 const app = css({
+  position: 'absolute',
+  top: 'calc(48px + $4)',
+  right: '$4',
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
@@ -16,15 +30,16 @@ const app = css({
   backgroundColor: 'white',
   borderRadius: '$2',
   padding: '$4',
-  width: '500px',
-  height: '100%',
+  width: '400px',
+  height: 'calc(100% - (48px + $4) * 2)',
   maxWidth: '50%',
   overflow: 'auto',
+
+  boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 });
 
 function App() {
   const innerRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const isVisible = useAppVisible();
   const [filter, setFilter] = useState('');
 

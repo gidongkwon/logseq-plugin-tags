@@ -5,6 +5,8 @@ export const commonEntryStyle = css({
   alignItems: 'center',
   gap: '$4',
   padding: '$3',
+  cursor: 'pointer',
+  borderRadius: '$2',
 
   '&:hover': {
     backgroundColor: '$slate2',
