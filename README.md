@@ -13,3 +13,6 @@ So, I have made one. If you are looking for Obsidian-like tag pane, this is the 
 
 ## How to use?
 WIP. Please manually load prebuilt package from [Releases](https://github.com/gidongkwon/logseq-plugin-tags/releases) page.
+
+## Demo
+![demo](demo.gif)
