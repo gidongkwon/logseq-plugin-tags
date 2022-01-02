@@ -25,6 +25,7 @@
   },
   "logseq": {
     "id": "logseq-tags",
-    "title": "Tags"
+    "title": "Tags",
+    "icon": "tags-plugin-icon.png"
   }
 }
