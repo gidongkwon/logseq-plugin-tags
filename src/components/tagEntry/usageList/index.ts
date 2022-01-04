@@ -9,6 +9,6 @@ export const commonEntryStyle = css({
   borderRadius: '$2',
 
   '&:hover': {
-    backgroundColor: '$slate2',
+    backgroundColor: '$elevation0Hover',
   },
 });

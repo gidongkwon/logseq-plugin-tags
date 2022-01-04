@@ -3,13 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-function main() {
+async function main() {
   const key = logseq.baseInfo.id;
   console.info(`${key}: MAIN`);
 
+  const { preferredThemeMode } = await logseq.App.getUserConfigs();
+
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <App themeMode={preferredThemeMode} />
     </React.StrictMode>,
     document.getElementById('root'),
   );
@@ -46,4 +48,4 @@ function main() {
   });
 }
 
-logseq.ready(main).catch(console.error);
+logseq.ready().then(main).catch(console.error);

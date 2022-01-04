@@ -21,7 +21,7 @@ const StyledTagHeader = styled('div', {
 
   borderRadius: '$2',
   '&:hover': {
-    backgroundColor: '$slate2',
+    backgroundColor: '$elevation0Hover',
   },
   [`& ${Text}`]: {
     cursor: 'default',
@@ -63,8 +63,8 @@ export const TagEntry = () => {
             css={{
               padding: '$2',
               borderRadius: '$1',
-              backgroundColor: '$slate3',
-              color: '$slate9',
+              backgroundColor: '$elevation1',
+              color: '$lowContrast',
             }}
           >
             {usages.length}

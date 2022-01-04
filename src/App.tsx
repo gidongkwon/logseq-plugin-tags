@@ -27,7 +27,7 @@ const app = css({
   display: 'flex',
   flexDirection: 'column',
   gap: '$3',
-  backgroundColor: 'white',
+  backgroundColor: '$elevation0',
   borderRadius: '$2',
   padding: '$4',
   width: '400px',
@@ -38,10 +38,15 @@ const app = css({
   boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
 });
 
-function App() {
+type Props = {
+  themeMode: AppUserConfigs['preferredThemeMode'];
+};
+
+export function App({ themeMode: initialThemeMode }: Props) {
   const innerRef = useRef<HTMLDivElement>(null);
   const isVisible = useAppVisible();
   const [filter, setFilter] = useState('');
+  const themeMode = useThemeMode(initialThemeMode);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
@@ -50,7 +55,7 @@ function App() {
   if (isVisible) {
     return (
       <main
-        className={body()}
+        className={`${body()} ${themeMode === 'dark' ? darkTheme.className : ''}`}
         onClick={e => {
           if (!innerRef.current?.contains(e.target as any)) {
             window.logseq.hideMainUI();
