@@ -1,8 +1,12 @@
+import { AppUserConfigs } from '@logseq/libs/dist/LSPlugin';
 import { Input } from 'components/Input';
+import { TagSortOptions } from 'components/TagSortOptions';
+import { useThemeMode } from 'hooks/useThemeMode';
 import React, { useRef, useState } from 'react';
+import { TagSortType } from 'types';
 import { TagList } from './components/TagList';
 import { useAppVisible } from './hooks/useAppVisible';
-import { css } from './stitches.config';
+import { css, darkTheme } from './stitches.config';
 
 const body = css({
   position: 'relative',
@@ -46,7 +50,16 @@ export function App({ themeMode: initialThemeMode }: Props) {
   const innerRef = useRef<HTMLDivElement>(null);
   const isVisible = useAppVisible();
   const [filter, setFilter] = useState('');
+
+  const [sortType, setSortType] = useState<TagSortType>(
+    logseq.settings?.sortType ?? TagSortType.NameAsc,
+  );
   const themeMode = useThemeMode(initialThemeMode);
+
+  const handleSortTypeChange = (type: TagSortType) => {
+    setSortType(type);
+    logseq.updateSettings({ sortType: type });
+  };
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
@@ -69,7 +82,12 @@ export function App({ themeMode: initialThemeMode }: Props) {
             placeholder='Search tags'
             onChange={handleSearchInputChange}
           />
-          <TagList filter={filter} />
+          <TagSortOptions
+            sortType={sortType}
+            onSortTypeChange={handleSortTypeChange}
+            css={{ alignSelf: 'center' }}
+          />
+          <TagList filter={filter} sortType={sortType} />
         </div>
       </main>
     );

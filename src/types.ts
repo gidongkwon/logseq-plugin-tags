@@ -6,3 +6,10 @@ export type Tag = {
 };
 
 export type TagUsageType = 'block' | 'page';
+
+export enum TagSortType {
+  NameAsc = 'NameAsc',
+  NameDesc = 'NameDesc',
+  UsageAsc = 'UsageAsc',
+  UsageDesc = 'UsageDesc',
+}
