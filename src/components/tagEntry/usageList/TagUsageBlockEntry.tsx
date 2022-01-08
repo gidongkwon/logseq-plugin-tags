@@ -23,7 +23,10 @@ export const TagUsageBlockEntry = ({ block }: Props) => {
       className={commonEntryStyle()}
       onClick={async e => {
         const containingPage = await logseq.Editor.getPage(block.page.id);
-        return logseq.Editor.scrollToBlockInPage(containingPage!.name, block.uuid);
+        return logseq.Editor.scrollToBlockInPage(
+          containingPage!.name,
+          (block.uuid as any)['$uuid$'],
+        );
       }}
     >
       <TagContainerTypeBadge type='block' />
