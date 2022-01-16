@@ -6,7 +6,7 @@ export function useAppVisible() {
   const isMounted = useMountedState();
   useEffect(() => {
     const eventName = 'ui:visible:changed';
-    const handler = async ({ visible }: any) => {
+    const handler = async ({ visible }: { visible: boolean }) => {
       if (isMounted()) {
         setVisible(visible);
       }

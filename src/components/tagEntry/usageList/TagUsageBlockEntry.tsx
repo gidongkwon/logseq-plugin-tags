@@ -1,5 +1,5 @@
-import { BlockEntity } from '@logseq/libs/dist/LSPlugin';
 import { Mark, Paragraph } from 'components/Text';
+import { QueryResultBlockEntity } from 'logseqQueryResultTypes';
 import React, { useContext } from 'react';
 import { escapeRegExp } from 'utils';
 import { commonEntryStyle } from '.';
@@ -7,7 +7,7 @@ import { TagContext } from '../TagContext';
 import { TagContainerTypeBadge } from './TagUsageTypeBadge';
 
 type Props = {
-  block: BlockEntity;
+  block: QueryResultBlockEntity;
 };
 
 export const TagUsageBlockEntry = ({ block }: Props) => {
@@ -23,10 +23,7 @@ export const TagUsageBlockEntry = ({ block }: Props) => {
       className={commonEntryStyle()}
       onClick={async e => {
         const containingPage = await logseq.Editor.getPage(block.page.id);
-        return logseq.Editor.scrollToBlockInPage(
-          containingPage!.name,
-          (block.uuid as any)['$uuid$'],
-        );
+        return logseq.Editor.scrollToBlockInPage(containingPage!.name, block.uuid['$uuid$']);
       }}
     >
       <TagContainerTypeBadge type='block' />

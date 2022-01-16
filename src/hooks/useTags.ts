@@ -1,13 +1,13 @@
-import { BlockEntity, PageEntity } from '@logseq/libs/dist/LSPlugin.user';
+import { QueryResultBlockEntity, QueryResultPageEntity } from 'logseqQueryResultTypes';
 import { useLayoutEffect, useMemo, useState } from 'react';
 import { Tag } from '../types';
 import { escapeRegExp } from '../utils';
 import { useMountedState } from './useMountedState';
 
-export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
+export function useTags(): Record<string, Array<QueryResultBlockEntity | QueryResultPageEntity>> {
   const isMounted = useMountedState();
-  const [rawBlockRefs, setRawBlockRefs] = useState<any[]>([]);
-  const [rawPageTags, setRawPageTags] = useState<any[]>([]);
+  const [rawBlockRefs, setRawBlockRefs] = useState<[string, string, QueryResultBlockEntity][]>([]);
+  const [rawPageTags, setRawPageTags] = useState<[string, QueryResultPageEntity][]>([]);
 
   useLayoutEffect(() => {
     (async () => {
@@ -38,11 +38,11 @@ export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
   return useMemo(() => {
     type TagAndUsage = {
       tagName: string;
-      blockOrPage: any;
+      blockOrPage: QueryResultBlockEntity | QueryResultPageEntity;
     };
 
     const tagsWithNullsFromRef: Array<TagAndUsage | null> = rawBlockRefs.map(
-      ([blockContent, tagName, block]: [string, string, any]) => {
+      ([blockContent, tagName, block]) => {
         const escapedTag = escapeRegExp(tagName);
         const lowercaseBlockContent = blockContent.toLowerCase();
 
@@ -69,7 +69,7 @@ export function useTags(): Record<string, Array<BlockEntity | PageEntity>> {
       },
     );
 
-    const tagsFromPageTags: TagAndUsage[] = rawPageTags.map(([tagName, page]: string[]) => {
+    const tagsFromPageTags: TagAndUsage[] = rawPageTags.map(([tagName, page]) => {
       return {
         tagName,
         blockOrPage: page,

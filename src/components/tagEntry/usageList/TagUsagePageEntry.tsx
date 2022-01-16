@@ -1,11 +1,11 @@
-import { PageEntity } from '@logseq/libs/dist/LSPlugin';
 import { Text } from 'components/Text';
+import { QueryResultPageEntity } from 'logseqQueryResultTypes';
 import React from 'react';
 import { commonEntryStyle } from '.';
 import { TagContainerTypeBadge } from './TagUsageTypeBadge';
 
 type Props = {
-  page: PageEntity;
+  page: QueryResultPageEntity;
 };
 
 export const TagUsagePageEntry = ({ page }: Props) => {

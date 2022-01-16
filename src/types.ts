@@ -1,8 +1,8 @@
-import { BlockEntity, PageEntity } from '@logseq/libs/dist/LSPlugin';
+import { QueryResultBlockEntity, QueryResultPageEntity } from 'logseqQueryResultTypes';
 
 export type Tag = {
   name: string;
-  usages: Array<BlockEntity | PageEntity>;
+  usages: Array<QueryResultBlockEntity | QueryResultPageEntity>;
 };
 
 export type TagUsageType = 'block' | 'page';
