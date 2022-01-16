@@ -63,8 +63,8 @@ export const TagEntry = () => {
             css={{
               padding: '$2',
               borderRadius: '$1',
-              backgroundColor: '$elevation1',
-              color: '$lowContrast',
+              backgroundColor: '$elevation2',
+              color: '$slate9',
             }}
           >
             {usages.length}
